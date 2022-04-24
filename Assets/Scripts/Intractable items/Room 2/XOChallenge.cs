@@ -37,7 +37,17 @@ public class XOChallenge : MonoBehaviour
         {
             doingChallenge = true;
         }
+
+        if(doingChallenge)
+        {
+
+        }
         
+    }
+
+    void SeletObjectToMove()
+    {
+
     }
 
     private void OnTriggerEnter(Collider other)
