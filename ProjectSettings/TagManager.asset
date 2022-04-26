@@ -9,6 +9,7 @@ TagManager:
   - Reach
   - Object
   - LevelKey
+  - Challenge key
   layers:
   - Default
   - TransparentFX
