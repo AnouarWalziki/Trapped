@@ -14,6 +14,7 @@ public class XOChallenge : MonoBehaviour
     public GameObject SelectModeUI;
     public GameObject EditModeUI;
 
+    public AudioSource objectDestroySound;
 
     private Vector3 oldPosition;
     private Vector3 newPosition;
@@ -40,6 +41,8 @@ public class XOChallenge : MonoBehaviour
     [SerializeField] private bool canSelectObjects;
 
     [SerializeField] private float objectsInPlace = 0f;
+
+    public bool challengDone;
 
     // Update is called once per frame
     void Update()
@@ -88,8 +91,7 @@ public class XOChallenge : MonoBehaviour
                 inReach = false;
 
                 StopChallenge();
-                StartCoroutine(DestroyNotKeysObjects());
-                //ShowChallengeResult();
+                StartCoroutine(DestroyNotKeysObjects());              
                                               
             }
             else
@@ -363,9 +365,10 @@ public class XOChallenge : MonoBehaviour
             {
                 yield return new WaitForSeconds(1);
                 Destroy(challengeGameObjects[i]);
-               
+                objectDestroySound.Play();
             } 
         }
+        challengDone = true;
         //Destroy(gameObject);
     }
     

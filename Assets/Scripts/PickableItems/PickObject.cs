@@ -17,6 +17,8 @@ public class PickObject : MonoBehaviour
 
     public Quaternion originalRotation;
 
+    public float throwForceStrengh = 10;
+
     public GameObject ReachOB;
 
     private float smooth = 5.0f;
@@ -81,6 +83,7 @@ public class PickObject : MonoBehaviour
         crosshair.SetActive(true);
         gameObject.transform.SetParent(null);
         gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        gameObject.GetComponent<Rigidbody>().AddForce(playerSocket.transform.forward * throwForceStrengh, ForceMode.Impulse);
         ReachOB.SetActive(true);
         yield return new WaitForSeconds(0.2f);
         
