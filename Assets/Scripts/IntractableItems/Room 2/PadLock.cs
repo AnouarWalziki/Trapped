@@ -29,7 +29,7 @@ public class PadLock : MonoBehaviour
 
     private bool tryingToUnlockLock = false;
     public AudioSource OpenPadlockSound;
-    private bool lockOpened = false;
+    public bool lockOpened = false;
     public float wheelsTruningAngle = 35f;
 
     public GameObject[] lockWheels;
@@ -161,7 +161,7 @@ public class PadLock : MonoBehaviour
             ) 
         {
             //Combiantion is correct 
-            Debug.Log("Unlocked");
+            //Debug.Log("Unlocked");
             StartCoroutine(OpenLock());
         } 
         else

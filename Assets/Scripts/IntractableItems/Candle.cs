@@ -8,7 +8,9 @@ public class Candle : MonoBehaviour
 
     public GameObject lighter;
 
-    public GameObject InteractImage;
+    public GameObject interactImage;
+
+    public GameObject grabImage;
 
     public Outline outline;
 
@@ -18,22 +20,32 @@ public class Candle : MonoBehaviour
 
     public bool fireOn;
 
+    public bool candleOntable;
+
+    private DetectKeyInPlace scriptToDetectCandleOnTable;
+
+
     // Start is called before the first frame update
     void Start()
     {
         outline = gameObject.GetComponent<Outline>();
         flames.SetActive(false);
+        scriptToDetectCandleOnTable = FindObjectOfType<DetectKeyInPlace>().GetComponent<DetectKeyInPlace>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(inReach && canBeLighted && !fireOn && lighter.GetComponent<Lighter>().onFire && Input.GetButtonDown("Interact"))
+        candleOntable = scriptToDetectCandleOnTable.inPlace;
+
+        if (inReach && canBeLighted && !fireOn && lighter.GetComponent<Lighter>().onFire && Input.GetButtonDown("Interact")
+            && FindObjectOfType<DetectKeyInPlace>().inPlace) 
         {
             flames.SetActive(true);
             fireOn = true;
         }
-        else if (inReach && fireOn && !lighter.GetComponent<Lighter>().onFire && Input.GetButtonDown("Interact"))
+        else if (inReach && fireOn && !lighter.GetComponent<Lighter>().onFire && Input.GetButtonDown("Interact")
+            && FindObjectOfType<DetectKeyInPlace>().inPlace)
         {
             flames.SetActive(false);
             fireOn = false;
@@ -44,19 +56,26 @@ public class Candle : MonoBehaviour
     {
         if (other.gameObject.tag == "Reach")
         {
-            inReach = true;
-            InteractImage.SetActive(true);
-            outline.enabled = true;
+            if(candleOntable)
+            {
+                inReach = true;
+                interactImage.SetActive(true);
+                outline.enabled = true;
+            }         
         }
     }
 
+    
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Reach")
         {
-            inReach = false;
-            InteractImage.SetActive(false);
-            outline.enabled = false;
+            if (candleOntable)
+            {
+                inReach = false;
+                interactImage.SetActive(false);
+                outline.enabled = false;
+            }
         }
-    }
+    }    
 }

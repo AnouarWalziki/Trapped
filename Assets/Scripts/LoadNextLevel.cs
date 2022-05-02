@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class LoadNextLevel : MonoBehaviour
 {
+    public FirstPersonController playerScript;
+
     public string sceneToLoad;
+
+    public AudioSource teleportSound;
 
     private GameObject sceneLoader;
 
@@ -18,10 +23,17 @@ public class LoadNextLevel : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            sceneLoader.GetComponent<SceneLoader>().sceneToLoad = sceneToLoad;
-            sceneLoader.GetComponent<SceneLoader>().StartLoad();
-        }
-            
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+            StartCoroutine(loadScene());
+        }          
+    }
 
+    IEnumerator loadScene()
+    {
+        playerScript.enabled = false;
+        teleportSound.Play();
+        yield return new WaitForSeconds(3);
+        sceneLoader.GetComponent<SceneLoader>().sceneToLoad = sceneToLoad;
+        sceneLoader.GetComponent<SceneLoader>().StartLoad();
     }
 }

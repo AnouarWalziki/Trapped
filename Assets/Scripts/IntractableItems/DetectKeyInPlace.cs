@@ -22,7 +22,7 @@ public class DetectKeyInPlace : MonoBehaviour
             trigger.GetComponent<Rigidbody>().isKinematic = true;
             trigger.transform.position = KeyPosition;
             trigger.transform.rotation = KeyRotation;
-            trigger.GetComponent<PickObject>().enabled = false;
+            Destroy(trigger.GetComponent<PickObject>());
 
             if (trigger.GetComponent<Candle>().fireOn)
                 ImageOB.GetComponent<MoveImageWithKey>().keyInPlace = true;
@@ -45,6 +45,7 @@ public class DetectKeyInPlace : MonoBehaviour
         }
     }
 
+    /*
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.tag == "LevelKey")
@@ -56,4 +57,5 @@ public class DetectKeyInPlace : MonoBehaviour
             }
         }
     }
+    */
 }

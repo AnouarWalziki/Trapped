@@ -14,11 +14,11 @@ public class MainMenuController : MonoBehaviour
 
     public GameObject sceneLoader;
 
-    public GameObject menuElements;
+    //public GameObject menuElements;
 
     public void Play()
     {
-        sceneLoader.GetComponent<SceneLoader>().sceneToLoad = "Room1";
+        sceneLoader.GetComponent<SceneLoader>().sceneToLoad = "StartingLevel";
         sceneLoader.GetComponent<SceneLoader>().StartLoad();
     }
 

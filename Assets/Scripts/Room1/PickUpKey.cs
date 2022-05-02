@@ -10,7 +10,7 @@ public class PickUpKey : MonoBehaviour
 
     public GameObject keyOB;
     public GameObject invOB;
-    public GameObject pickUpText;
+    //public GameObject pickUpText;
     public AudioSource keySound;
 
     public bool inReach;
@@ -22,7 +22,7 @@ public class PickUpKey : MonoBehaviour
     void Start()
     {
         inReach = false;
-        pickUpText.SetActive(false);
+        //pickUpText.SetActive(false);
         invOB.SetActive(false);
         doOneTime = true;
     }
@@ -44,7 +44,7 @@ public class PickUpKey : MonoBehaviour
                 Destroy(keyOB);
                 keySound.Play();
                 invOB.SetActive(true);
-                pickUpText.SetActive(false);
+                //pickUpText.SetActive(false);
             }
         }
     }
@@ -59,7 +59,7 @@ public class PickUpKey : MonoBehaviour
             {
                 inReach = true;
                 gameObject.GetComponent<Outline>().enabled = true;
-                pickUpText.SetActive(true);
+                //pickUpText.SetActive(true);
             }
                 
         }
@@ -70,7 +70,7 @@ public class PickUpKey : MonoBehaviour
         {
             inReach = false;
             gameObject.GetComponent<Outline>().enabled = false;
-            pickUpText.SetActive(false);
+            //pickUpText.SetActive(false);
         }
     }
 

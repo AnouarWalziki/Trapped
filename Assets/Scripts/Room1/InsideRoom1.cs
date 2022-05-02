@@ -15,24 +15,20 @@ public class InsideRoom1 : MonoBehaviour
 
     public GameObject BlockAccess;
 
-    public ModalWindowManager ModalWindow;
+    //public ModalWindowManager ModalWindow;
 
-    public FirstPersonController playerScript;
+    //public FirstPersonController playerScript;
 
-    private bool WindowOpen;
+    //private bool WindowOpen;
 
     private bool HaveBeenTriggered;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        WindowOpen = false;
-        HaveBeenTriggered = false;
-    }
 
     // Update is called once per frame
+    /*
     void Update()
     {
+        
         if (WindowOpen && Input.GetButtonDown("Interact"))
         {
             ModalWindow.CloseWindow();
@@ -40,7 +36,7 @@ public class InsideRoom1 : MonoBehaviour
             playerScript.enabled = true;
             Destroy(gameObject);
         }
-    }
+    }*/
 
     private void OnTriggerEnter(Collider other)
     {
@@ -50,11 +46,13 @@ public class InsideRoom1 : MonoBehaviour
             enterDoorAnim.SetBool("Open", false);
             BlockAccess.SetActive(true);
             closeDoorSound.Play();
-            StartCoroutine(flashlightTip());
+            //StartCoroutine(flashlightTip());
             HaveBeenTriggered = true;
+            Destroy(gameObject);
         }
     }
 
+    /*
     IEnumerator flashlightTip()
     {
         yield return new WaitForSeconds(10f);
@@ -62,5 +60,5 @@ public class InsideRoom1 : MonoBehaviour
         playerScript.enabled = false;
         ModalWindow.OpenWindow();
         WindowOpen = true;
-    }
+    }*/
 }

@@ -17,27 +17,38 @@ public class MoveImageWithKey : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ShowKey = false;
-        keyInPlace = false;
-        haveMoved = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (keyInPlace)
+        if (keyInPlace && !haveMoved)
         {
-            anim.SetBool("Open", true);
-            MoveSound.Play();
-            ShowKey = true;
-            haveMoved = true;
+            StartCoroutine(moveToShowKey());
         }
         else if(!keyInPlace && haveMoved)
         {
-            anim.SetBool("Open", false);
-            MoveSound.Play();
-            ShowKey = false;
-            haveMoved = false;
+            StartCoroutine(moveToHideKey());
         }
     }
+
+    IEnumerator moveToShowKey()
+    {
+        yield return new WaitForSeconds(1);
+        MoveSound.Play();
+        anim.SetBool("Open", true);
+        ShowKey = true;
+        haveMoved = true;
+    }
+
+    IEnumerator moveToHideKey()
+    {
+        yield return new WaitForSeconds(1);
+        MoveSound.Play();
+        anim.SetBool("Open", false);
+        ShowKey = false;
+        haveMoved = false;
+    }
+
 }
