@@ -5,16 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
-    public GameObject startButton;
-    public GameObject ControlsButton;
-    public GameObject QuitButton;
-    public GameObject closeControlsButton;
-
-    public GameObject HowToPlayMenu;
+    public GameObject MainMenuPage;
+    public GameObject HowToPlayMenuPage;
 
     public GameObject sceneLoader;
 
-    //public GameObject menuElements;
+    private void Start()
+    {
+        MainMenuPage.SetActive(true);
+        HowToPlayMenuPage.SetActive(false);
+    }
 
     public void Play()
     {
@@ -22,23 +22,16 @@ public class MainMenuController : MonoBehaviour
         sceneLoader.GetComponent<SceneLoader>().StartLoad();
     }
 
-    public void OpenControls()
+    public void OpenHelpMenu()
     {
-        startButton.SetActive(false);
-        ControlsButton.SetActive(false);
-        QuitButton.SetActive(false);
-        HowToPlayMenu.SetActive(true);
-        closeControlsButton.SetActive(true);
-
+        MainMenuPage.SetActive(false);
+        HowToPlayMenuPage.SetActive(true);
     }
 
-    public void CloseControls()
+    public void CloseHelpMenu()
     {
-        startButton.SetActive(true);
-        ControlsButton.SetActive(true);
-        QuitButton.SetActive(true);
-        HowToPlayMenu.SetActive(false);
-        closeControlsButton.SetActive(false);
+        MainMenuPage.SetActive(true);
+        HowToPlayMenuPage.SetActive(false);
     }
 
     public void Quit()
