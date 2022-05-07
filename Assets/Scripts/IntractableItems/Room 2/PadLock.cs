@@ -5,6 +5,7 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class PadLock : MonoBehaviour
 {
+    public GameObject padlockUI;
     public GameObject playerOb;
     private Animator playerAnim;
     public GameObject playerCrosshair;
@@ -22,8 +23,6 @@ public class PadLock : MonoBehaviour
 
     
     public bool playerIsInspectingLock = false;
-    public Vector3 playerPosWhileInspecting;
-    public Quaternion playerRotationWhileInspecting;
     public Vector3 playerPosAfterInspecting;
     public Quaternion playerRotationAfterInspecting;
 
@@ -42,6 +41,7 @@ public class PadLock : MonoBehaviour
     void Start()
     {
         playerAnim = playerOb.GetComponent<Animator>();
+        padlockUI.SetActive(false);
     }
 
     // Update is called once per frame
@@ -78,11 +78,12 @@ public class PadLock : MonoBehaviour
         //playerOb.transform.position = playerPosWhileInspecting;
         //playerOb.transform.rotation = playerRotationWhileInspecting;
 
+        padlockUI.SetActive(true);
+
         playerAnim.enabled = true;
 
         lockOutline.enabled = false;
         playerOb.GetComponent<FirstPersonController>().enabled = false;
-        playerAnim.applyRootMotion = false;
         playerAnim.SetBool("InspectLock", true);
         playerCrosshair.SetActive(false);
         gameObject.GetComponent<Animator>().SetBool("InspectLock", true);
@@ -208,18 +209,12 @@ public class PadLock : MonoBehaviour
     IEnumerator UnlockPlayerMovement(int delay)
     {
         yield return new WaitForSeconds(delay);
-        //playerAnim.applyRootMotion = true;
-        /*
-         float duration = 1.0;
-        for (t=0.0; t<duration;t+=Time.deltaTime) {
-        transform.position = Vector3.Lerp(Vector3(0,0,0), Vector3(0,0,5), t/duration);
-        yield;
-        }
-         */
+        padlockUI.SetActive(false);
+
         playerAnim.enabled = false;
         
-        //playerOb.transform.position = playerPosAfterInspecting;
-        //playerOb.transform.rotation = playerRotationAfterInspecting;
+        playerOb.transform.position = playerPosAfterInspecting;
+        playerOb.transform.rotation = playerRotationAfterInspecting;
 
         playerOb.GetComponent<FirstPersonController>().enabled = true;
         playerCrosshair.SetActive(true);
