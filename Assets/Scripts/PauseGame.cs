@@ -1,61 +1,79 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
+using UnityEngine.InputSystem;
 
 public class PauseGame : MonoBehaviour
 {
-
-    public GameObject menu;
-    public GameObject resume;
-    public GameObject quit;
-
-    public AudioListener audioListner;
-
-    public GameObject tips;
-
-    public bool on;
-    public bool off;
+    public FirstPersonController playerScript;
+    public GameObject pauseMenuUI;
+    public GameObject HowToPlayMEnuUI;
+    [SerializeField] bool on;
+    static PlayerInput input;
+    //public bool off;
 
     // Start is called before the first frame update
     void Start()
     {
-        menu.SetActive(false);
-        off = true;
+        input = GetComponent<PlayerInput>();
+        pauseMenuUI.SetActive(false);
         on = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(off && Input.GetButtonDown("pause"))
+        if(!on && Input.GetButtonDown("pause"))
         {
-            //tips.SetActive(false);
-            audioListner.enabled = false;
-            Time.timeScale = 0;
-            menu.SetActive(true);
-            off = false;
-            on = true;
+            Pause();
         }
         else if (on && Input.GetButtonDown("pause"))
         {
-            //tips.SetActive(true);
-            audioListner.enabled = true;
-            Time.timeScale = 1;
-            menu.SetActive(false);
-            off = true;
-            on = false;
+            Resume();
         }
+    }
+
+    public void Pause()
+    {
+        playerScript.enabled = false;
+        Time.timeScale = 0;
+
+        pauseMenuUI.SetActive(true);
+        on = true;
     }
 
     public void Resume()
     {
-        //tips.SetActive(true);
-        audioListner.enabled = true;
+        playerScript.enabled = true;
         Time.timeScale = 1;
-        menu.SetActive(false);
-        off = true;
+
+        pauseMenuUI.SetActive(false);
+        HowToPlayMEnuUI.SetActive(false);
         on = false;
     }
+
+    public void openHowToPlayMenu()
+    {
+        playerScript.enabled = false;
+        Time.timeScale = 0;
+
+        pauseMenuUI.SetActive(false);
+        HowToPlayMEnuUI.SetActive(true);
+        on = true;
+    }
+
+    public void closeHowToPlayMenu()
+    {
+        playerScript.enabled = false;
+        Time.timeScale = 0;
+
+        pauseMenuUI.SetActive(true);
+        HowToPlayMEnuUI.SetActive(false);
+        on = true;
+    }
+
+
 
     public void Exit()
     {

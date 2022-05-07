@@ -22,6 +22,12 @@ public class MainMenuController : MonoBehaviour
         sceneLoader.GetComponent<SceneLoader>().StartLoad();
     }
 
+    public void LoadMainMenuScene()
+    {
+        sceneLoader.GetComponent<SceneLoader>().sceneToLoad = "MainMenu";
+        sceneLoader.GetComponent<SceneLoader>().StartLoad();
+    }
+
     public void OpenHelpMenu()
     {
         MainMenuPage.SetActive(false);
