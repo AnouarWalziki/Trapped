@@ -10,26 +10,24 @@ public class PickUpLighter : MonoBehaviour
 
     public GameObject InteractImage;
 
-    public ModalWindowManager ModalWindow;
+    //public ModalWindowManager ModalWindow;
 
-    public FirstPersonController playerScript;
+    //public FirstPersonController playerScript;
 
     public bool inReach;
 
     private Outline outline;
 
-    private bool WindowOpen;
+    //private bool WindowOpen;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        ModalWindow.CloseWindow();
         inReach = false;
         lighterInv.SetActive(false);
         outline = gameObject.GetComponent<Outline>();
         outline.enabled = false;
-        WindowOpen = false;
     }
 
     // Update is called once per frame
@@ -40,20 +38,10 @@ public class PickUpLighter : MonoBehaviour
             lighterInv.SetActive(true);
             InteractImage.SetActive(false);
             outline.enabled = false;
-            playerScript.enabled = false;
-            ModalWindow.OpenWindow();
-            WindowOpen = true;
+            //playerScript.enabled = false;
             inReach = false;
-            
-        }
-        else if(WindowOpen && Input.GetButtonDown("Interact"))
-        {           
-            ModalWindow.CloseWindow();
-            WindowOpen = false;
-            playerScript.enabled = true;
             Destroy(gameObject);
-        }
-        
+        }       
     }
 
     private void OnTriggerEnter(Collider other)
