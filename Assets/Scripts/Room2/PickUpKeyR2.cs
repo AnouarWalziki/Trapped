@@ -39,7 +39,7 @@ public class PickUpKeyR2 : MonoBehaviour
             pickUpText.SetActive(false);
         }
 
-        if (keyInFocus && Input.GetButtonDown("Interact"))
+        if (keyInFocus && Input.GetButtonDown("Pickup"))
         {            
             keySound.Play();
             invOB.SetActive(true);

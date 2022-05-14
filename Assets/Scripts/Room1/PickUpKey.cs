@@ -39,7 +39,7 @@ public class PickUpKey : MonoBehaviour
                 doOneTime = false;
             }
             
-            if (inReach && Input.GetButtonDown("Interact"))
+            if (inReach && Input.GetButtonDown("Pickup"))
             {
                 Destroy(keyOB);
                 keySound.Play();
