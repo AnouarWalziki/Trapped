@@ -7,8 +7,9 @@ using UnityEngine.InputSystem;
 public class PauseGame : MonoBehaviour
 {
     public FirstPersonController playerScript;
+    public GameObject sceneLoader;
     public GameObject pauseMenuUI;
-    public GameObject HowToPlayMEnuUI;
+    public GameObject HowToPlayMenuUI;
     [SerializeField] bool on;
     static PlayerInput input;
     //public bool off;
@@ -16,7 +17,6 @@ public class PauseGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        input = GetComponent<PlayerInput>();
         pauseMenuUI.SetActive(false);
         on = false;
     }
@@ -39,6 +39,9 @@ public class PauseGame : MonoBehaviour
         playerScript.enabled = false;
         Time.timeScale = 0;
 
+        Cursor.visible = true;
+        Screen.lockCursor = false;
+
         pauseMenuUI.SetActive(true);
         on = true;
     }
@@ -48,28 +51,41 @@ public class PauseGame : MonoBehaviour
         playerScript.enabled = true;
         Time.timeScale = 1;
 
+        Cursor.visible = false;
+        Screen.lockCursor = true;
+
         pauseMenuUI.SetActive(false);
-        HowToPlayMEnuUI.SetActive(false);
+        HowToPlayMenuUI.SetActive(false);
         on = false;
     }
 
-    public void openHowToPlayMenu()
+    public void OpenHowToPlayMenu()
     {
         playerScript.enabled = false;
         Time.timeScale = 0;
 
         pauseMenuUI.SetActive(false);
-        HowToPlayMEnuUI.SetActive(true);
+        HowToPlayMenuUI.SetActive(true);
         on = true;
     }
 
-    public void closeHowToPlayMenu()
+    public void LoadMainMenuScene()
+    {
+        Cursor.visible = false;
+        Screen.lockCursor = true;
+
+        Time.timeScale = 1;
+        sceneLoader.GetComponent<SceneLoader>().sceneToLoad = "MainMenu";
+        sceneLoader.GetComponent<SceneLoader>().StartLoad();
+    }
+
+    public void CloseHowToPlayMenu()
     {
         playerScript.enabled = false;
         Time.timeScale = 0;
 
         pauseMenuUI.SetActive(true);
-        HowToPlayMEnuUI.SetActive(false);
+        HowToPlayMenuUI.SetActive(false);
         on = true;
     }
 
