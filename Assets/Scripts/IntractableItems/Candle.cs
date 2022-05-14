@@ -59,6 +59,7 @@ public class Candle : MonoBehaviour
             if(candleOntable)
             {
                 inReach = true;
+                grabImage.SetActive(false);
                 interactImage.SetActive(true);
                 outline.enabled = true;
             }         
@@ -73,6 +74,7 @@ public class Candle : MonoBehaviour
             if (candleOntable)
             {
                 inReach = false;
+                grabImage.SetActive(false);
                 interactImage.SetActive(false);
                 outline.enabled = false;
             }
