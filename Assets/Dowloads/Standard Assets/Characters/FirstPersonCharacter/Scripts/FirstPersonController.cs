@@ -58,6 +58,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			m_MouseLook.Init(transform , m_Camera.transform);
         }
 
+        private void OnEnable()
+        {
+            Cursor.visible = false;
+            Screen.lockCursor = true;
+        }
+
 
         // Update is called once per frame
         private void Update()
